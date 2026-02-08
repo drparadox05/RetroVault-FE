@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWallet } from "@/hooks/useWallet";
 import Taskbar from "@/components/win95/Taskbar";
+import { useToast } from "@/hooks/use-toast";
 
 const Index: React.FC = () => {
   const navigate = useNavigate();
   const { connect, isConnected } = useWallet();
+  const { toast } = useToast();
+  const [isConnecting, setIsConnecting] = useState(false);
 
-  const handleConnect = () => {
-    connect();
-    navigate("/dashboard");
+  const handleConnect = async () => {
+    setIsConnecting(true);
+    try {
+      await connect();
+      toast({
+        title: "Wallet Connected",
+        description: "Successfully connected to MetaMask",
+      });
+      navigate("/dashboard");
+    } catch (error: any) {
+      console.error("Connection error:", error);
+      toast({
+        title: "Connection Failed",
+        description: error.message || "Failed to connect wallet. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsConnecting(false);
+    }
   };
 
   return (
@@ -72,8 +91,9 @@ const Index: React.FC = () => {
             <button
               className="win95-button w-full font-pixel text-xl py-2"
               onClick={handleConnect}
+              disabled={isConnecting}
             >
-              🦊 Connect Wallet
+              {isConnecting ? "⏳ Connecting..." : "🦊 Connect Wallet"}
             </button>
             <div className="flex gap-1">
               <div className="win95-inset flex-1 px-2 py-1 text-xs font-mono text-center text-muted-foreground">
