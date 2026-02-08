@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 14% 53%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 75%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 75%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 240 100% 25%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 75%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 63%;
+    --muted-foreground: 0 0% 25%;
+
+    --accent: 0 0% 85%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 53%;
+    --input: 0 0% 100%;
+    --ring: 240 100% 25%;
+
+    --radius: 0px;
+
+    /* Win95 specific */
+    --win95-bg: 0 0% 75%;
+    --win95-titlebar: 240 100% 25%;
+    --win95-titlebar-inactive: 0 0% 50%;
+    --win95-highlight: 0 0% 100%;
+    --win95-shadow: 0 0% 0%;
+    --win95-button-face: 0 0% 75%;
+    --win95-desktop: 180 100% 25%;
+    --win95-green: 120 100% 25%;
+    --win95-red: 0 100% 40%;
+    --win95-yellow: 48 100% 50%;
+
+    --sidebar-background: 0 0% 75%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 240 100% 25%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 85%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 53%;
+    --sidebar-ring: 240 100% 25%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 13px;
+    image-rendering: pixelated;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'VT323', monospace;
+  }
+}
+
+/* Win95 Beveled Border Utilities */
+.win95-outset {
+  border: 2px solid;
+  border-color: hsl(var(--win95-highlight)) hsl(var(--win95-shadow)) hsl(var(--win95-shadow)) hsl(var(--win95-highlight));
+}
+
+.win95-inset {
+  border: 2px solid;
+  border-color: hsl(var(--win95-shadow)) hsl(var(--win95-highlight)) hsl(var(--win95-highlight)) hsl(var(--win95-shadow));
+}
+
+.win95-button {
+  background: hsl(var(--win95-button-face));
+  border: 2px solid;
+  border-color: hsl(var(--win95-highlight)) hsl(var(--win95-shadow)) hsl(var(--win95-shadow)) hsl(var(--win95-highlight));
+  padding: 2px 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 23px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win95-button:active {
+  border-color: hsl(var(--win95-shadow)) hsl(var(--win95-highlight)) hsl(var(--win95-highlight)) hsl(var(--win95-shadow));
+  padding: 3px 11px 1px 13px;
+}
+
+.win95-button:disabled {
+  color: hsl(var(--muted-foreground));
+  cursor: not-allowed;
+}
+
+/* Desktop background pattern */
+.win95-desktop {
+  background-color: hsl(var(--win95-desktop));
+  background-image: 
+    radial-gradient(circle, hsl(180 100% 20%) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--win95-bg));
+  border: 1px solid hsl(var(--border));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--win95-button-face));
+  border: 2px solid;
+  border-color: hsl(var(--win95-highlight)) hsl(var(--win95-shadow)) hsl(var(--win95-shadow)) hsl(var(--win95-highlight));
+}
